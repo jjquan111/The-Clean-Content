@@ -12,20 +12,7 @@ The Clean Content is an innovative software designed to filter and extract conte
 ## Ethical Considerations
 We prioritize ethical aspects like content censorship, cultural sensitivity, inclusivity, user autonomy, and privacy in our design and implementation.
 
-## Installation
-Instructions on how to install and set up the software will be provided here.
 
-## Usage
-Detailed guide on how to use The Clean Content, with examples and screenshots.
-
-## Contributing
-Guidelines for contributing to the project, including coding standards, pull request process, etc.
-
-## License
-Information about the software's licensing and usage rights.
-
-## Contact
-Details for users to contact the development team for support or feedback.
 
 ---
 
