@@ -1,0 +1,23 @@
+<!-- my_documents.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>My Documents</title>
+</head>
+
+<body>
+    <h1>My Documents</h1>
+    {% if documents %}
+    <ul>
+        {% for doc in documents %}
+        <li>{{ doc.filename }} - <a href="{{ url_for('download_file', filename=doc.filename) }}">Download</a></li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>No documents found.</p>
+    {% endif %}
+</body>
+
+</html>
