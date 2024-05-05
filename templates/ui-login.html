@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>The Clean Content</title>
+    <meta content="" name="description"/>
+    <meta content="" name="author"/>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/static/assets/images/favicon.png" type="image/x-icon"/>
+    <!-- For iPhone -->
+    <link rel="apple-touch-icon-precomposed">
+    <!-- For iPhone 4 Retina display -->
+    <link rel="apple-touch-icon-precomposed" sizes="114x114">
+    <!-- For iPad -->
+    <link rel="apple-touch-icon-precomposed" sizes="72x72">
+    <!-- For iPad Retina display -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144">
+
+    <!-- CORE CSS FRAMEWORK - START -->
+    <link href="/static/assets/plugins/pace/pace-theme-flash.css" rel="stylesheet" type="text/css" media="screen"/>
+    <link rel="stylesheet" href="https://www.jq22.com/jquery/bootstrap-3.3.4.css">
+    <link href="/static/assets/fonts/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css"/>
+    <link href="/static/assets/css/animate.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/static/assets/plugins/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" type="text/css"/>
+    <!-- CORE CSS FRAMEWORK - END -->
+
+    <!-- HEADER SCRIPTS INCLUDED ON THIS PAGE - START -->
+
+    <!-- HEADER SCRIPTS INCLUDED ON THIS PAGE - END -->
+
+    <!-- CORE CSS TEMPLATE - START -->
+    <link href="/static/assets/css/style.css" rel="stylesheet" type="text/css"/>
+    <!-- CORE CSS TEMPLATE - END -->
+
+</head>
+<!-- END HEAD -->
+
+<!-- BEGIN BODY -->
+
+<body class=" login_page">
+
+<div class="container-fluid" id="app">
+    <div class="login-wrapper row" style="position: relative;top: 250px;">
+        <div id="login"
+             class="login loginpage col-lg-offset-4 col-md-offset-3 col-sm-offset-3 col-xs-offset-0 col-xs-12 col-sm-6 col-lg-4">
+            <div class="login-form-header">
+                <img src="/static/data/icons/padlock.png" alt="login-icon" style="max-width:64px">
+                <div class="login-header">
+                    <h3 class="bold color-white">The Clean Content</h3>
+                    <h4>
+                        <small>Please enter your credentials to login.</small>
+                    </h4>
+                </div>
+            </div>
+
+            <div class="box login">
+
+                <div class="content-body" style="padding-top:30px">
+
+                    <form id="msg_validate" action="#" novalidate="novalidate" class="no-mb no-mt">
+                        <div class="row">
+                            <div class="col-xs-12">
+
+                                <div class="form-group">
+                                    <label class="form-label">UserName</label>
+                                    <div class="controls">
+                                        <input type="text" class="form-control" name="formfield2"
+                                               placeholder="Please input username" v-model="username">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label">Password</label>
+                                    <div class="controls">
+                                        <input type="password" class="form-control" name="formfield1" placeholder="Please input your password" v-model="password">
+                                    </div>
+                                </div>
+
+                                <div class="pull-left">
+                                    <a href="javascript:;" class="btn btn-primary mt-10 btn-corner right-15" @click="login">Login</a>
+                                </div>
+
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <p id="nav">
+
+                <a class="pull-right" href="javascript:;" title="Sign Up" @click="register">Register</a>
+            </p>
+
+        </div>
+    </div>
+</div>
+
+<!-- MAIN CONTENT AREA ENDS -->
+<!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
+
+<!-- CORE JS FRAMEWORK - START -->
+<script src="https://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+<script src="/static/assets/js/jquery.easing.min.js"></script>
+<script src="https://www.jq22.com/jquery/bootstrap-3.3.4.js"></script>
+<script src="/static/assets/plugins/pace/pace.min.js"></script>
+<script src="/static/assets/plugins/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+<script src="/static/assets/plugins/viewport/viewportchecker.js"></script>
+<script>
+    window.jQuery || document.write('<script src="../assets/js/jquery-1.11.2.min.js"><\/script>');
+</script>
+<!-- CORE JS FRAMEWORK - END -->
+
+<!-- OTHER SCRIPTS INCLUDED ON THIS PAGE - START -->
+
+<!-- OTHER SCRIPTS INCLUDED ON THIS PAGE - END -->
+
+<!-- CORE TEMPLATE JS - START -->
+<script src="/static/assets/js/scripts.js"></script>
+<!-- END CORE TEMPLATE JS - END -->
+<!--<script src="https://unpkg.com/vue/dist/vue.global.js"></script>-->
+<script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.13/vue.js"></script>
+<script src="/static/js/axios/axios.min.js"></script>
+
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            username: "",
+            password: "",
+        },
+        methods: {
+
+            // 登录
+            login() {
+                if (this.username === "" || this.password === "") {
+                    alert("error")
+                } else {
+                    axios.post('login/auth/', {
+                        username: this.username,
+                        password: this.password
+                    }).then(response => {
+                        if (response.data['code'] == 200) {
+                            alert("success")
+                            sessionStorage.setItem('username', this.username)
+                            window.location.href = "http://127.0.0.1:8000/linemain/"
+                        } else if (response.data['code'] == 444) {
+                            alert("error")
+                        }
+                    }).catch(error => {
+                        console.log(error)
+                        alert("500")
+                    })
+                }
+            },
+            //  注册页面跳转
+            register(){
+                window.location.href = "http://127.0.0.1:8000/register/"
+            }
+        },
+    })
+</script>
+</body>
+
+</html>
