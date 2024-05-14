@@ -283,7 +283,6 @@
             userss: ""
         },
         created() {
-            // 判断是否已经登录
             this.userss = sessionStorage.getItem("username");
             if (this.userss == null) {
 
@@ -295,24 +294,18 @@
             index(){
                 window.location.href = "http://127.0.0.1:8000/index/"
             },
-             // 个人信息页面跳转
             MyMessage() {
                 window.location.replace("http://127.0.0.1:8000/href/pro/")
             },
-            // 系统跳转
             MySubject(){
                  window.location.replace("http://127.0.0.1:8000/href/subject/")
             },
-             //  在线系统跳转
             SelectSubject(){
                  window.location.replace("http://127.0.0.1:8000/href/subject2")
             },
-            // 管理员href/select/
-            //  修改密码
             UpdatePwd(){
                  window.location.replace("http://127.0.0.1:8000/href/UpdatePwd/")
             },
-            //展示教师信息
             TeachInfo(){
                  window.location.replace("http://127.0.0.1:8000/pro/TeachInfo/")
                 },
@@ -339,7 +332,6 @@
             ScreenShow(){
                 window.location.replace("http://127.0.0.1:8000/href/ScreenShow/")
             },
-            // 退出
             logout(){
                 this.userss == null
                 window.location.replace("http://127.0.0.1:8000/login/")
@@ -350,36 +342,27 @@
 </script>
 
 <script>
- // 获取textarea和拖放区域的元素
 var textarea = document.getElementById('message');
 var imgarea = document.getElementById('messageimg');
 var dropArea = document.getElementById('dropArea');
 
-// 阻止浏览器默认的拖放行为
 dropArea.addEventListener('dragover', function(e) {
   e.preventDefault();
 });
 
-// 监听拖放区域的drop事件
 dropArea.addEventListener('drop', function(e) {
   e.preventDefault();
 
-  // 获取拖放的图片文件
   var file = e.dataTransfer.files[0];
 
-  // 创建FileReader对象
   var reader = new FileReader();
 
-  // 当文件读取完成时
   reader.onload = function(event) {
-    // 将图像的base64内容添加到textarea中
     textarea.value += event.target.result;
 
-    // 将base64编码添加到img标签的src属性上
     imgarea.src = event.target.result;
   };
 
-  // 将图片文件读取为DataURL
   reader.readAsDataURL(file);
 });
 
