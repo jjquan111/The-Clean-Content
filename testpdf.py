@@ -50,19 +50,16 @@ if __name__ == "__main__":
                 print('File is PDF.')
                 return 'pdf'
         except Exception as e:
-            pass  # 不是PDF文件
+            pass 
 
-        # 尝试读取DOCX文件
+      
         try:
             doc = docx.Document(file_path)
             print('File is DOCX.')
             rename_file(file_path)
 
-            # 将DOCX转换为PDF
             output_pdf_path = 'static/file.pdf'
 
-            # # 将 Word 文档转换为 PDF
-            # convert("static/test.docx", "static/file.pdf")
 
             html = PyDocX.to_html('static/test.docx')
             f = open('test.html', 'w')
@@ -75,11 +72,11 @@ if __name__ == "__main__":
             print('DOCX has been converted to PDF:', output_pdf_path)
             return output_pdf_path
         except ValueError:
-            pass  # 不是DOCX文件
+            pass 
 
         print('Unknown file format.')
 
-    file_path = 'static/file.pdf'  # 修改为你的文件路径
+    file_path = 'static/file.pdf' 
     result = detect_and_convert(file_path)
 
 
