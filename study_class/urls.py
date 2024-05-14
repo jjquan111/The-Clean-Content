@@ -29,18 +29,18 @@ urlpatterns = [
     url('uploadwordfile',study_class.views.uploadwordfile),
     url('uploadmainfile',study_class.views.uploadmainfile),
     url('admin/', admin.site.urls),
-    # 前台首页
+
     url(r'index/$', href_index.StudyIndex.as_view()),
     url(r'indextec/$', href_index.TecIndex.as_view()),
-    # 学生登录
+
     url(r'login/$', href_login.Login.as_view()),
 
     url(r'loginTec/$', href_login.loginTec.as_view()),
-    # 注册
+
     url(r'register/$', href_register.Register.as_view()),
-    # 注册接口
+
     url(r'register/register/create/$', register.Register.as_view()),
-    # 登录接口
+
     url('login/login/auth/$', login.Login.as_view()),
     url('loginTec/logintec/auth/$', login.LoginTec.as_view()),
 
