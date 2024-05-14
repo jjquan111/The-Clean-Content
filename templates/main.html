@@ -130,12 +130,9 @@
 
 <script>
     function showLoadingMessage() {
-        // 显示加载消息框
         document.getElementById('loadingMessage').style.display = 'block';
 
-        // 模拟加载过程（在实际情况下，这里应该是发送请求到服务器）
         setTimeout(function() {
-            // 加载完成后隐藏加载消息框
             document.getElementById('loadingMessage').style.display = 'none';
         }, 5000);
     }
