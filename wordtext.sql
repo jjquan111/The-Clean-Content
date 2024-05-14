@@ -1,9 +1,3 @@
--- --------------------------------------------------------
--- 主机:                           127.0.0.1
--- 服务器版本:                        5.5.58 - MySQL Community Server (GPL)
--- 服务器操作系统:                      Win64
--- HeidiSQL 版本:                  11.0.0.5919
--- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET NAMES utf8 */;
@@ -12,11 +6,9 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
 
--- 导出 wordtext 的数据库结构
 CREATE DATABASE IF NOT EXISTS `wordtext` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `wordtext`;
 
--- 导出  表 wordtext.auth_group 结构
 CREATE TABLE IF NOT EXISTS `auth_group` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(150) NOT NULL,
@@ -24,13 +16,12 @@ CREATE TABLE IF NOT EXISTS `auth_group` (
   UNIQUE KEY `name` (`name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
--- 正在导出表  wordtext.auth_group 的数据：~1 rows (大约)
-/*!40000 ALTER TABLE `auth_group` DISABLE KEYS */;
-INSERT INTO `auth_group` (`id`, `name`) VALUES
-	(1, '垃圾分类员');
-/*!40000 ALTER TABLE `auth_group` ENABLE KEYS */;
 
--- 导出  表 wordtext.auth_group_permissions 结构
+INSERT INTO `auth_group` (`id`, `name`) VALUES
+	(1, 'Garbage sorter');
+
+
+
 CREATE TABLE IF NOT EXISTS `auth_group_permissions` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `group_id` int(11) NOT NULL,
@@ -42,16 +33,12 @@ CREATE TABLE IF NOT EXISTS `auth_group_permissions` (
   CONSTRAINT `auth_group_permissio_permission_id_84c5c92e_fk_auth_perm` FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
--- 正在导出表  wordtext.auth_group_permissions 的数据：~4 rows (大约)
-/*!40000 ALTER TABLE `auth_group_permissions` DISABLE KEYS */;
 INSERT INTO `auth_group_permissions` (`id`, `group_id`, `permission_id`) VALUES
 	(1, 1, 48),
 	(2, 1, 50),
 	(3, 1, 51),
 	(4, 1, 52);
-/*!40000 ALTER TABLE `auth_group_permissions` ENABLE KEYS */;
 
--- 导出  表 wordtext.auth_permission 结构
 CREATE TABLE IF NOT EXISTS `auth_permission` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
@@ -62,8 +49,6 @@ CREATE TABLE IF NOT EXISTS `auth_permission` (
   CONSTRAINT `auth_permission_content_type_id_2f476e4b_fk_django_co` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8;
 
--- 正在导出表  wordtext.auth_permission 的数据：~60 rows (大约)
-/*!40000 ALTER TABLE `auth_permission` DISABLE KEYS */;
 INSERT INTO `auth_permission` (`id`, `name`, `content_type_id`, `codename`) VALUES
 	(1, 'Can add log entry', 1, 'add_logentry'),
 	(2, 'Can change log entry', 1, 'change_logentry'),
@@ -125,9 +110,8 @@ INSERT INTO `auth_permission` (`id`, `name`, `content_type_id`, `codename`) VALU
 	(58, 'Can change 识别图片管理', 15, 'change_detectsjpg'),
 	(59, 'Can delete 识别图片管理', 15, 'delete_detectsjpg'),
 	(60, 'Can view 识别图片管理', 15, 'view_detectsjpg');
-/*!40000 ALTER TABLE `auth_permission` ENABLE KEYS */;
 
--- 导出  表 wordtext.auth_user 结构
+
 CREATE TABLE IF NOT EXISTS `auth_user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `password` varchar(128) NOT NULL,
@@ -143,15 +127,12 @@ CREATE TABLE IF NOT EXISTS `auth_user` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
-
--- 正在导出表  wordtext.auth_user 的数据：~2 rows (大约)
-/*!40000 ALTER TABLE `auth_user` DISABLE KEYS */;
 INSERT INTO `auth_user` (`id`, `password`, `last_login`, `is_superuser`, `username`, `first_name`, `last_name`, `email`, `is_staff`, `is_active`, `date_joined`) VALUES
 	(1, 'pbkdf2_sha256$150000$8W2T636eS49Y$excnfY2y8t6H639wepSQ9uv0sksOe94Amk4cM1nhMl4=', '2024-01-23 18:20:05', 1, 'admin', '', '', '111@11.com', 1, 1, '2020-05-06 06:07:00'),
 	(2, 'pbkdf2_sha256$150000$Ga0dJhYnxj99$eFGcPFGTDV9PrOxahLXGoj1Zo5htykomURqGG0YD/4k=', '2023-11-28 14:19:20', 0, 'recycler1', '', '', '', 1, 1, '2023-11-28 05:07:00');
-/*!40000 ALTER TABLE `auth_user` ENABLE KEYS */;
 
--- 导出  表 wordtext.auth_user_groups 结构
+
+
 CREATE TABLE IF NOT EXISTS `auth_user_groups` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
@@ -163,13 +144,9 @@ CREATE TABLE IF NOT EXISTS `auth_user_groups` (
   CONSTRAINT `auth_user_groups_user_id_6a12ed8b_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
--- 正在导出表  wordtext.auth_user_groups 的数据：~1 rows (大约)
-/*!40000 ALTER TABLE `auth_user_groups` DISABLE KEYS */;
 INSERT INTO `auth_user_groups` (`id`, `user_id`, `group_id`) VALUES
 	(1, 2, 1);
-/*!40000 ALTER TABLE `auth_user_groups` ENABLE KEYS */;
 
--- 导出  表 wordtext.auth_user_user_permissions 结构
 CREATE TABLE IF NOT EXISTS `auth_user_user_permissions` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
@@ -181,8 +158,7 @@ CREATE TABLE IF NOT EXISTS `auth_user_user_permissions` (
   CONSTRAINT `auth_user_user_permi_permission_id_1fbb5f2c_fk_auth_perm` FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
 
--- 正在导出表  wordtext.auth_user_user_permissions 的数据：~30 rows (大约)
-/*!40000 ALTER TABLE `auth_user_user_permissions` DISABLE KEYS */;
+
 INSERT INTO `auth_user_user_permissions` (`id`, `user_id`, `permission_id`) VALUES
 	(1, 1, 1),
 	(2, 1, 2),
@@ -214,9 +190,7 @@ INSERT INTO `auth_user_user_permissions` (`id`, `user_id`, `permission_id`) VALU
 	(28, 1, 28),
 	(29, 1, 29),
 	(30, 1, 30);
-/*!40000 ALTER TABLE `auth_user_user_permissions` ENABLE KEYS */;
 
--- 导出  表 wordtext.classnames 结构
 CREATE TABLE IF NOT EXISTS `classnames` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `class_name` varchar(32) NOT NULL,
@@ -225,14 +199,11 @@ CREATE TABLE IF NOT EXISTS `classnames` (
   UNIQUE KEY `class_name` (`class_name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
--- 正在导出表  wordtext.classnames 的数据：~2 rows (大约)
-/*!40000 ALTER TABLE `classnames` DISABLE KEYS */;
+
 INSERT INTO `classnames` (`id`, `class_name`, `time`) VALUES
 	(1, '302', '2023-05-02 23:28:18'),
 	(2, '305', '2023-05-02 23:28:15');
-/*!40000 ALTER TABLE `classnames` ENABLE KEYS */;
 
--- 导出  表 wordtext.classnames_user 结构
 CREATE TABLE IF NOT EXISTS `classnames_user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `classnames_id` int(11) NOT NULL,
@@ -244,14 +215,10 @@ CREATE TABLE IF NOT EXISTS `classnames_user` (
   CONSTRAINT `ClassNames_user_userinfo_id_87d6832a_fk_UserInfo_id` FOREIGN KEY (`userinfo_id`) REFERENCES `userinfo` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
--- 正在导出表  wordtext.classnames_user 的数据：~2 rows (大约)
-/*!40000 ALTER TABLE `classnames_user` DISABLE KEYS */;
 INSERT INTO `classnames_user` (`id`, `classnames_id`, `userinfo_id`) VALUES
 	(1, 1, 1),
 	(2, 2, 1);
-/*!40000 ALTER TABLE `classnames_user` ENABLE KEYS */;
 
--- 导出  表 wordtext.dal_messageinfo 结构
 CREATE TABLE IF NOT EXISTS `dal_messageinfo` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(30) NOT NULL,
@@ -261,8 +228,7 @@ CREATE TABLE IF NOT EXISTS `dal_messageinfo` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
--- 正在导出表  wordtext.dal_messageinfo 的数据：~4 rows (大约)
-/*!40000 ALTER TABLE `dal_messageinfo` DISABLE KEYS */;
+
 INSERT INTO `dal_messageinfo` (`id`, `username`, `email`, `subject`, `info`) VALUES
 	(1, '1', 'demo@qq.com', 'demo', '<p>测试使用<img src="data:image/png;base64,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" alt="" /></p>'),
 	(2, '1', 'demo@qq.com', 'demo', '<p>测试使用<img src="data:image/png;base64,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" alt="" /></p>'),
@@ -279,8 +245,7 @@ CREATE TABLE IF NOT EXISTS `detectinfo` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8;
 
--- 正在导出表  wordtext.detectinfo 的数据：~13 rows (大约)
-/*!40000 ALTER TABLE `detectinfo` DISABLE KEYS */;
+
 INSERT INTO `detectinfo` (`id`, `detectcontent`, `detectresult`) VALUES
 	(40, '正常的交流不会被过滤', '正常的交流不会被过滤'),
 	(41, '	你好，很高兴认识你！', '	你好，很高兴认识你！'),
@@ -295,9 +260,7 @@ INSERT INTO `detectinfo` (`id`, `detectcontent`, `detectresult`) VALUES
 	(51, 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD', '你好，  【Sb】\n\n【情色】内容\n\n'),
 	(52, 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD', '你好，  【Sb】\n\n【情色】内容\n\n'),
 	(53, 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD', '【你好】，  【Sb】\n\n【情色】内容\n\n');
-/*!40000 ALTER TABLE `detectinfo` ENABLE KEYS */;
 
--- 导出  表 wordtext.detectjpginfo 结构
 CREATE TABLE IF NOT EXISTS `detectjpginfo` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `detectcontent` varchar(32) NOT NULL,
@@ -305,15 +268,11 @@ CREATE TABLE IF NOT EXISTS `detectjpginfo` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
--- 正在导出表  wordtext.detectjpginfo 的数据：~3 rows (大约)
-/*!40000 ALTER TABLE `detectjpginfo` DISABLE KEYS */;
 INSERT INTO `detectjpginfo` (`id`, `detectcontent`, `detectresult`) VALUES
 	(10, 'static\\outputjpg\\10\\upload.jpg', 'static\\outputjpg\\10\\output.jpg'),
 	(11, 'static\\outputjpg\\11\\upload.jpg', 'static\\outputjpg\\11\\output.jpg'),
 	(12, 'static\\outputjpg\\12\\upload.jpg', 'static\\outputjpg\\12\\output.jpg');
-/*!40000 ALTER TABLE `detectjpginfo` ENABLE KEYS */;
 
--- 导出  表 wordtext.django_admin_log 结构
 CREATE TABLE IF NOT EXISTS `django_admin_log` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `action_time` datetime NOT NULL,
@@ -330,8 +289,7 @@ CREATE TABLE IF NOT EXISTS `django_admin_log` (
   CONSTRAINT `django_admin_log_user_id_c564eba6_fk` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=103 DEFAULT CHARSET=utf8;
 
--- 正在导出表  wordtext.django_admin_log 的数据：~102 rows (大约)
-/*!40000 ALTER TABLE `django_admin_log` DISABLE KEYS */;
+
 INSERT INTO `django_admin_log` (`id`, `action_time`, `object_id`, `object_repr`, `action_flag`, `change_message`, `content_type_id`, `user_id`) VALUES
 	(1, '2020-05-06 06:10:18', '1', 'student1', 1, '[{"added": {}}]', 10, 1),
 	(2, '2020-05-06 06:10:46', '1', 'Java', 1, '[{"added": {}}]', 8, 1),
@@ -435,9 +393,8 @@ INSERT INTO `django_admin_log` (`id`, `action_time`, `object_id`, `object_repr`,
 	(100, '2024-01-18 13:24:13', '39', '你好，很高兴认识你！', 3, '', 14, 1),
 	(101, '2024-01-18 13:24:13', '38', '你好，SB很高兴认ooxx识你情色sbSB。', 3, '', 14, 1),
 	(102, '2024-01-23 18:20:16', '50', 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD', 3, '', 14, 1);
-/*!40000 ALTER TABLE `django_admin_log` ENABLE KEYS */;
 
--- 导出  表 wordtext.django_content_type 结构
+
 CREATE TABLE IF NOT EXISTS `django_content_type` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `app_label` varchar(100) NOT NULL,
@@ -446,8 +403,6 @@ CREATE TABLE IF NOT EXISTS `django_content_type` (
   UNIQUE KEY `django_content_type_app_label_model_76bd3d3b_uniq` (`app_label`,`model`)
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 
--- 正在导出表  wordtext.django_content_type 的数据：~15 rows (大约)
-/*!40000 ALTER TABLE `django_content_type` DISABLE KEYS */;
 INSERT INTO `django_content_type` (`id`, `app_label`, `model`) VALUES
 	(1, 'admin', 'logentry'),
 	(3, 'auth', 'group'),
@@ -464,9 +419,7 @@ INSERT INTO `django_content_type` (`id`, `app_label`, `model`) VALUES
 	(9, 'dal', 'tecinfo'),
 	(10, 'dal', 'userinfo'),
 	(6, 'sessions', 'session');
-/*!40000 ALTER TABLE `django_content_type` ENABLE KEYS */;
 
--- 导出  表 wordtext.django_migrations 结构
 CREATE TABLE IF NOT EXISTS `django_migrations` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `app` varchar(255) NOT NULL,
@@ -475,8 +428,6 @@ CREATE TABLE IF NOT EXISTS `django_migrations` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
 
--- 正在导出表  wordtext.django_migrations 的数据：~30 rows (大约)
-/*!40000 ALTER TABLE `django_migrations` DISABLE KEYS */;
 INSERT INTO `django_migrations` (`id`, `app`, `name`, `applied`) VALUES
 	(1, 'contenttypes', '0001_initial', '2020-05-06 06:06:56'),
 	(2, 'auth', '0001_initial', '2020-05-06 06:06:56'),
@@ -508,9 +459,7 @@ INSERT INTO `django_migrations` (`id`, `app`, `name`, `applied`) VALUES
 	(28, 'dal', '0005_auto_20231128_1529', '2023-11-28 07:32:55'),
 	(29, 'dal', '0006_auto_20231128_1530', '2023-11-28 07:32:55'),
 	(30, 'dal', '0007_auto_20231128_1548', '2023-11-28 07:49:37');
-/*!40000 ALTER TABLE `django_migrations` ENABLE KEYS */;
 
--- 导出  表 wordtext.django_session 结构
 CREATE TABLE IF NOT EXISTS `django_session` (
   `session_key` varchar(40) NOT NULL,
   `session_data` longtext NOT NULL,
@@ -519,8 +468,6 @@ CREATE TABLE IF NOT EXISTS `django_session` (
   KEY `django_session_expire_date_a5c62663` (`expire_date`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- 正在导出表  wordtext.django_session 的数据：~27 rows (大约)
-/*!40000 ALTER TABLE `django_session` DISABLE KEYS */;
 INSERT INTO `django_session` (`session_key`, `session_data`, `expire_date`) VALUES
 	('07019rjmpwuseig0283g2cjqoiysl41n', 'eyJ1c2VybmFtZSI6InRlYWNoZXIyIn0:1prsGn:tlXuOzBrUsEpSqK2AyS7T1-gC8g9ZQGNGNKC_0YezqY', '2023-05-11 03:26:09'),
 	('0e2r85hxtx3pyb10cogrlc8ack59cu32', 'eyJ1c2VybmFtZSI6ImRlbW9kZW1vIn0:1pWtSt:TLDKiSCpu2kyEqqTgjSPbqafmw3gSPLvAKu9ZtqBpP4', '2023-03-14 06:27:55'),
@@ -557,9 +504,7 @@ INSERT INTO `django_session` (`session_key`, `session_data`, `expire_date`) VALU
 	('wv0n3w2b1hydie165tyc2pdnje4dvh8l', 'eyJ1c2VybmFtZSI6InN0dWRlbnQxIn0:1pp9s2:DJZSioMYTBIzmNAhDEQcCnjec4VkwAFLS9ijEtaRC-M', '2023-05-03 15:37:22'),
 	('x3gqz1bo5likw5um0pal4xvgjywrh6uj', 'Y2YzNWUwZWU3MzY5NjRiZmI1MDM5NTIwZDQ4N2ZjNWEzZTdjNGViZTp7InVzZXJuYW1lIjoiZ3JlZW4xIn0=', '2023-03-27 23:55:59'),
 	('yudykm2885127x971odezg4fw76n0uwz', 'ZTMwZGYzZGM2MzA1YjkyOWRhN2U1MWQ1MjM2YzMxZjYwZTFlODk3ODp7InVzZXJuYW1lIjoiZGVtbzkwYXNmIiwiX2F1dGhfdXNlcl9pZCI6IjEiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaGFzaCI6IjU3MGNiYjJlM2MwMTJlMWU5MzlhMTJiMDkyNzZmNTQwY2QwMmQ4YzkiLCJfbWVudXMiOiJbe1wibmFtZVwiOiBcIkRhbFwiLCBcImljb25cIjogXCJmYXIgZmEtY2lyY2xlXCIsIFwibW9kZWxzXCI6IFt7XCJuYW1lXCI6IFwiXFx1NjU0ZlxcdTYxMWZcXHU0ZmUxXFx1NjA2ZlxcdThmYzdcXHU2ZWU0XFx1N2JhMVxcdTc0MDZcIiwgXCJpY29uXCI6IFwiZmFyIGZhLWNpcmNsZVwiLCBcInVybFwiOiBcIi9hZG1pbi9kYWwvZGV0ZWN0cy9cIiwgXCJhZGRVcmxcIjogXCIvYWRtaW4vZGFsL2RldGVjdHMvYWRkL1wiLCBcImJyZWFkY3J1bWJzXCI6IFt7XCJuYW1lXCI6IFwiRGFsXCIsIFwiaWNvblwiOiBcImZhciBmYS1jaXJjbGVcIn0sIHtcIm5hbWVcIjogXCJcXHU2NTRmXFx1NjExZlxcdTRmZTFcXHU2MDZmXFx1OGZjN1xcdTZlZTRcXHU3YmExXFx1NzQwNlwiLCBcImljb25cIjogXCJmYXIgZmEtY2lyY2xlXCJ9XSwgXCJlaWRcIjogMTAwMn0sIHtcIm5hbWVcIjogXCJcXHU3NTI4XFx1NjIzN1xcdTRmZTFcXHU2MDZmXCIsIFwiaWNvblwiOiBcImZhciBmYS1jaXJjbGVcIiwgXCJ1cmxcIjogXCIvYWRtaW4vZGFsL3VzZXJpbmZvL1wiLCBcImFkZFVybFwiOiBcIi9hZG1pbi9kYWwvdXNlcmluZm8vYWRkL1wiLCBcImJyZWFkY3J1bWJzXCI6IFt7XCJuYW1lXCI6IFwiRGFsXCIsIFwiaWNvblwiOiBcImZhciBmYS1jaXJjbGVcIn0sIHtcIm5hbWVcIjogXCJcXHU3NTI4XFx1NjIzN1xcdTRmZTFcXHU2MDZmXCIsIFwiaWNvblwiOiBcImZhciBmYS1jaXJjbGVcIn1dLCBcImVpZFwiOiAxMDAzfV0sIFwiZWlkXCI6IDEwMDF9LCB7XCJuYW1lXCI6IFwiXFx1OGJhNFxcdThiYzFcXHU1NDhjXFx1NjM4OFxcdTY3NDNcIiwgXCJpY29uXCI6IFwiZmFzIGZhLXNoaWVsZC1hbHRcIiwgXCJtb2RlbHNcIjogW3tcIm5hbWVcIjogXCJcXHU3NTI4XFx1NjIzN1wiLCBcImljb25cIjogXCJmYXIgZmEtdXNlclwiLCBcInVybFwiOiBcIi9hZG1pbi9hdXRoL3VzZXIvXCIsIFwiYWRkVXJsXCI6IFwiL2FkbWluL2F1dGgvdXNlci9hZGQvXCIsIFwiYnJlYWRjcnVtYnNcIjogW3tcIm5hbWVcIjogXCJcXHU4YmE0XFx1OGJjMVxcdTU0OGNcXHU2Mzg4XFx1Njc0M1wiLCBcImljb25cIjogXCJmYXMgZmEtc2hpZWxkLWFsdFwifSwge1wibmFtZVwiOiBcIlxcdTc1MjhcXHU2MjM3XCIsIFwiaWNvblwiOiBcImZhciBmYS11c2VyXCJ9XSwgXCJlaWRcIjogMTAwNX0sIHtcIm5hbWVcIjogXCJcXHU3ZWM0XCIsIFwiaWNvblwiOiBcImZhcyBmYS11c2Vycy1jb2dcIiwgXCJ1cmxcIjogXCIvYWRtaW4vYXV0aC9ncm91cC9cIiwgXCJhZGRVcmxcIjogXCIvYWRtaW4vYXV0aC9ncm91cC9hZGQvXCIsIFwiYnJlYWRjcnVtYnNcIjogW3tcIm5hbWVcIjogXCJcXHU4YmE0XFx1OGJjMVxcdTU0OGNcXHU2Mzg4XFx1Njc0M1wiLCBcImljb25cIjogXCJmYXMgZmEtc2hpZWxkLWFsdFwifSwge1wibmFtZVwiOiBcIlxcdTdlYzRcIiwgXCJpY29uXCI6IFwiZmFzIGZhLXVzZXJzLWNvZ1wifV0sIFwiZWlkXCI6IDEwMDZ9XSwgXCJlaWRcIjogMTAwNH1dIn0=', '2024-02-06 18:22:45');
-/*!40000 ALTER TABLE `django_session` ENABLE KEYS */;
 
--- 导出  表 wordtext.newsinfo 结构
 CREATE TABLE IF NOT EXISTS `newsinfo` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `newsid` varchar(32) NOT NULL,
@@ -570,33 +515,26 @@ CREATE TABLE IF NOT EXISTS `newsinfo` (
   UNIQUE KEY `newsid` (`newsid`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
--- 正在导出表  wordtext.newsinfo 的数据：~5 rows (大约)
-/*!40000 ALTER TABLE `newsinfo` DISABLE KEYS */;
 INSERT INTO `newsinfo` (`id`, `newsid`, `newscaptain`, `newsdetail`, `newsdate`) VALUES
 	(1, '1', '新闻1', '新闻', '2023.11.27'),
 	(2, '2', '新闻2', '新闻2', '2023.11.28'),
 	(3, '3', '新闻3', '回收新闻', '2023.11.28'),
 	(4, '4', '新闻4', '报纸新闻4', '2023.11.28'),
 	(5, '5', '新闻5', '回收新闻5', '2023.11.28');
-/*!40000 ALTER TABLE `newsinfo` ENABLE KEYS */;
 
--- 导出  表 wordtext.orderinfo 结构
 CREATE TABLE IF NOT EXISTS `orderinfo` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `ordercaptain` varchar(32) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
--- 正在导出表  wordtext.orderinfo 的数据：~4 rows (大约)
-/*!40000 ALTER TABLE `orderinfo` DISABLE KEYS */;
+
 INSERT INTO `orderinfo` (`id`, `ordercaptain`) VALUES
 	(7, '五个易拉罐[已完成]'),
 	(8, '七个易拉罐[已完成]'),
 	(9, '一个易拉罐[已完成]'),
 	(10, '三个易拉罐[已完成]');
-/*!40000 ALTER TABLE `orderinfo` ENABLE KEYS */;
 
--- 导出  表 wordtext.subject 结构
 CREATE TABLE IF NOT EXISTS `subject` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `teacher` varchar(32) NOT NULL,
@@ -607,15 +545,11 @@ CREATE TABLE IF NOT EXISTS `subject` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
--- 正在导出表  wordtext.subject 的数据：~3 rows (大约)
-/*!40000 ALTER TABLE `subject` DISABLE KEYS */;
 INSERT INTO `subject` (`id`, `teacher`, `subject_title`, `introduction`, `time`, `startime`) VALUES
 	(1, '李老师', 'Java', '软件编程', '2023-05-02 23:29:27', '2:30'),
 	(2, '王老师', '高数', '逻辑思维', '2023-05-02 23:29:25', '10：00'),
 	(3, 'teacher2', 'hadoop搭建2', 'hadoop搭建2', '2023-05-03 00:27:40', '15:00-17:00');
-/*!40000 ALTER TABLE `subject` ENABLE KEYS */;
 
--- 导出  表 wordtext.subject_class_name 结构
 CREATE TABLE IF NOT EXISTS `subject_class_name` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `subject_id` int(11) NOT NULL,
@@ -627,15 +561,11 @@ CREATE TABLE IF NOT EXISTS `subject_class_name` (
   CONSTRAINT `Subject_class_name_subject_id_fdde6f8a_fk_Subject_id` FOREIGN KEY (`subject_id`) REFERENCES `subject` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
--- 正在导出表  wordtext.subject_class_name 的数据：~3 rows (大约)
-/*!40000 ALTER TABLE `subject_class_name` DISABLE KEYS */;
 INSERT INTO `subject_class_name` (`id`, `subject_id`, `classnames_id`) VALUES
 	(1, 1, 1),
 	(2, 2, 2),
 	(3, 3, 1);
-/*!40000 ALTER TABLE `subject_class_name` ENABLE KEYS */;
 
--- 导出  表 wordtext.subject_subject_student 结构
 CREATE TABLE IF NOT EXISTS `subject_subject_student` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `subject_id` int(11) NOT NULL,
@@ -647,16 +577,13 @@ CREATE TABLE IF NOT EXISTS `subject_subject_student` (
   CONSTRAINT `Subject_subject_student_userinfo_id_f606dbcf_fk_UserInfo_id` FOREIGN KEY (`userinfo_id`) REFERENCES `userinfo` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
--- 正在导出表  wordtext.subject_subject_student 的数据：~4 rows (大约)
-/*!40000 ALTER TABLE `subject_subject_student` DISABLE KEYS */;
+
 INSERT INTO `subject_subject_student` (`id`, `subject_id`, `userinfo_id`) VALUES
 	(1, 1, 1),
 	(2, 2, 1),
 	(3, 3, 1),
 	(4, 3, 2);
-/*!40000 ALTER TABLE `subject_subject_student` ENABLE KEYS */;
 
--- 导出  表 wordtext.tecinfo 结构
 CREATE TABLE IF NOT EXISTS `tecinfo` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(32) NOT NULL,
@@ -671,16 +598,13 @@ CREATE TABLE IF NOT EXISTS `tecinfo` (
   UNIQUE KEY `phone` (`phone`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
--- 正在导出表  wordtext.tecinfo 的数据：~4 rows (大约)
-/*!40000 ALTER TABLE `tecinfo` DISABLE KEYS */;
+
 INSERT INTO `tecinfo` (`id`, `username`, `name`, `password`, `sex`, `experience`, `style`, `phone`) VALUES
 	(1, '李老师', '李四', '000000', '女', '3年经验', '负责', '15626548875'),
 	(2, 'teacher2', '张老师', '111111', '女', '5年经验', '认真', '18245695632'),
 	(3, 'teacher3', '教师3', '111111', '女', '9次项目经历', '精简', '17745286625'),
 	(4, 'teacher4', 'teacher4', '111111', '男', '1年经验', '幽默', '17625486325');
-/*!40000 ALTER TABLE `tecinfo` ENABLE KEYS */;
 
--- 导出  表 wordtext.tecinfo_subject_title 结构
 CREATE TABLE IF NOT EXISTS `tecinfo_subject_title` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `tecinfo_id` int(11) NOT NULL,
@@ -692,16 +616,13 @@ CREATE TABLE IF NOT EXISTS `tecinfo_subject_title` (
   CONSTRAINT `TecInfo_subject_title_tecinfo_id_cee42240_fk_TecInfo_id` FOREIGN KEY (`tecinfo_id`) REFERENCES `tecinfo` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
--- 正在导出表  wordtext.tecinfo_subject_title 的数据：~4 rows (大约)
-/*!40000 ALTER TABLE `tecinfo_subject_title` DISABLE KEYS */;
+
 INSERT INTO `tecinfo_subject_title` (`id`, `tecinfo_id`, `subject_id`) VALUES
 	(1, 1, 1),
 	(5, 2, 3),
 	(3, 3, 1),
 	(4, 4, 2);
-/*!40000 ALTER TABLE `tecinfo_subject_title` ENABLE KEYS */;
 
--- 导出  表 wordtext.userinfo 结构
 CREATE TABLE IF NOT EXISTS `userinfo` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(32) NOT NULL,
@@ -716,8 +637,7 @@ CREATE TABLE IF NOT EXISTS `userinfo` (
   UNIQUE KEY `phone` (`phone`)
 ) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 
--- 正在导出表  wordtext.userinfo 的数据：~19 rows (大约)
-/*!40000 ALTER TABLE `userinfo` DISABLE KEYS */;
+
 INSERT INTO `userinfo` (`id`, `username`, `password`, `email`, `name`, `classname`, `create_time`, `phone`) VALUES
 	(1, 'student1', '111111', '111111qq@qq.com', '李四', '1', '2023-04-29 12:33:48', '12344444444'),
 	(2, 'student2', '111111', 'qqqqq11@qq.com', '王五', '1', '2023-02-08 14:29:33', '12444855555'),
@@ -738,8 +658,4 @@ INSERT INTO `userinfo` (`id`, `username`, `password`, `email`, `name`, `classnam
 	(17, 'user8234', '123456', 'user8234@123.com', 'user8234', 'user8234', '2023-12-22 10:27:59', '12526548758'),
 	(18, 'demo82ef', 'demo82ef', 'demo82ef@163.com', 'demo82ef', 'demo82ef', '2024-01-18 13:26:47', '15487456487'),
 	(19, 'demo90asf', 'demo90asf', 'demo90asf@163.com', 'demo90asf', 'demo90asf', '2024-01-23 18:22:39', '15484548458');
-/*!40000 ALTER TABLE `userinfo` ENABLE KEYS */;
 
-/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
-/*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
