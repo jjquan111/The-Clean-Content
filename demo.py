@@ -18,6 +18,6 @@ print(recognized_text)
 print('------')
 
 if any(sent_text.strip() in recognized_text for sent_text in sent_text_list):
-    print("图像不健康")
+    print("image not good")
 else:
-    print("图像健康")
+    print("image good")
