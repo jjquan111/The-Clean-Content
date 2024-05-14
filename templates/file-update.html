@@ -97,14 +97,14 @@
                     <li class="open">
                         <a href="javascript:;" @click="index">
 
-                            <span class="title">首页</span>
+                            <span class="title">main</span>
                         </a>
                     </li>
 
                     <li class="">
                         <a href="javascript:;">
 
-                            <span class="title">敏感信息过滤</span>
+                            <span class="title">Sensitive information filtering</span>
                             <span class=""></span>
                         </a>
                         <ul class="sub-menu">
@@ -116,7 +116,7 @@
                     <li class="">
                         <a href="javascript:;" @click="FileUpdate">
                             <i class="fa fa-refresh"></i>
-                            <span class="title">敏感信息过滤</span>
+                            <span class="title">Sensitive information filtering</span>
                             <span class=""></span>
                         </a>
                         <ul class="sub-menu">
@@ -127,7 +127,7 @@
                     <li class="">
                         <a href="javascript:;" @click="FileUpdateJpg">
                             <i class="fa fa-refresh"></i>
-                            <span class="title">敏感信息管理</span>
+                            <span class="title">Sensitive information management</span>
                             <span class=""></span>
                         </a>
                         <ul class="sub-menu">
@@ -141,7 +141,7 @@
                     <li class="">
                         <a href="javascript:;">
 
-                            <span class="title">个人中心</span>
+                            <span class="title">Individual center</span>
                             <span class=""></span>
                         </a>
                         <ul class="sub-menu">
@@ -152,7 +152,7 @@
                     <li class="">
                         <a href="javascript:;" @click="UpdatePwd">
                             <i class="fa fa-refresh"></i>
-                            <span class="title">更新密码</span>
+                            <span class="title">Update password</span>
                             <span class=""></span>
                         </a>
                         <ul class="sub-menu">
@@ -166,7 +166,7 @@
 
                     <li class="">
                         <a href="javascript:;" @click="logout">
-                            <span class="title">退出</span>
+                            <span class="title">log out</span>
                             <span class=""></span>
                         </a>
                         <ul class="sub-menu">
@@ -205,7 +205,7 @@
                 <div class="col-lg-12">
                     <section class="box" style="height: 700px;overflow:auto">
                         <header class="panel_header">
-                            <h2 class="title pull-left" style="font-size: 23px;color: black">敏感信息过滤</h2>
+                            <h2 class="title pull-left" style="font-size: 23px;color: black">Sensitive information filtering</h2>
                             <div class="actions panel_actions pull-right">
                                 <a class="box_toggle fa fa-chevron-down"></a>
                                 <a class="box_setting fa fa-cog" data-toggle="modal" href="javascript:;"></a>
@@ -216,14 +216,14 @@
 
                         <form action="/passageupdate/" method="post" enctype="multipart/form-data" style="margin-left:30px">
                            {% csrf_token %}
-                           <label for="message">敏感信息识别：</label>
+                           <label for="message">Sensitive information identification：</label>
                                 <br>
                             <textarea id="message" name="message" rows="1" cols="150"></textarea>
                             <img id="messageimg" style="height:300px;width:500px">
 
-                            <div id="dropArea">拖动图片到此区域</div>
+                            <div id="dropArea">Drag the image to this area</div>
                             <br>
-                            <input type="submit" value="提交">
+                            <input type="submit" value="submit">
 
 
                         </form>
@@ -244,8 +244,8 @@
                               <table border="1" class="result-table" style="width:50%;margin-left:30px;cellspacing:300px">
                                 <tr>
                                     <th>id</th>
-                                    <th>过滤语句</th>
-                                    <th>过滤结果</th>
+                                    <th>Filter statement</th>
+                                    <th>Filter result</th>
                                 </tr>
                                 {% for n in detects %}
                                 <tr>
@@ -321,10 +321,9 @@
             userss: ""
         },
         created() {
-            // 判断是否已经登录
             this.userss = sessionStorage.getItem("username");
             if (this.userss == null) {
-                alert("抱歉，您还未登录");
+                alert("Sorry, you are not logged in yet");
                 window.location.href = "http://127.0.0.1:8000/login/"
             }
 
@@ -334,24 +333,18 @@
             index(){
                 window.location.href = "http://127.0.0.1:8000/index/"
             },
-             // 个人信息页面跳转
             MyMessage() {
                 window.location.replace("http://127.0.0.1:8000/href/pro/")
             },
-            // 系统跳转
             MySubject(){
                  window.location.replace("http://127.0.0.1:8000/href/subject/")
             },
-             //  在线系统跳转
             SelectSubject(){
                  window.location.replace("http://127.0.0.1:8000/href/subject2")
             },
-            // 管理员href/select/
-            //  修改密码
             UpdatePwd(){
                  window.location.replace("http://127.0.0.1:8000/href/UpdatePwd/")
             },
-            //展示教师信息
             TeachInfo(){
                  window.location.replace("http://127.0.0.1:8000/pro/TeachInfo/")
                 },
@@ -389,36 +382,24 @@
 </script>
 
 <script>
- // 获取textarea和拖放区域的元素
 var textarea = document.getElementById('message');
 var imgarea = document.getElementById('messageimg');
 var dropArea = document.getElementById('dropArea');
 
-// 阻止浏览器默认的拖放行为
 dropArea.addEventListener('dragover', function(e) {
   e.preventDefault();
 });
 
-// 监听拖放区域的drop事件
 dropArea.addEventListener('drop', function(e) {
   e.preventDefault();
 
-  // 获取拖放的图片文件
   var file = e.dataTransfer.files[0];
 
-  // 创建FileReader对象
   var reader = new FileReader();
-
-  // 当文件读取完成时
   reader.onload = function(event) {
-    // 将图像的base64内容添加到textarea中
     textarea.value += event.target.result;
-
-    // 将base64编码添加到img标签的src属性上
     imgarea.src = event.target.result;
   };
-
-  // 将图片文件读取为DataURL
   reader.readAsDataURL(file);
 });
 
