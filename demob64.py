@@ -7,14 +7,10 @@ from io import BytesIO
 
 db64=db64.split('data:image/jpeg;base64,')[1]
 
-# 读取base64编码的字符串
 base64_str = db64
 
-# 解码base64字符串为字节数据
 image_data = base64.b64decode(base64_str)
 
-# 将字节数据转换为图像对象
 image = Image.open(BytesIO(image_data))
 
-# 保存图像为df.jpg文件
 image.save("df.jpg")
