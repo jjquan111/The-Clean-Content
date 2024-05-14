@@ -39,10 +39,8 @@ def news_list(request):
 
 def tree(times,length):
     # train
-    # 训练数据
-    X_train = [[2, 10], [1, 8], [1, 12], [3, 15], [0, 10], [0, 80]]  # 特征: [关键词出现次数, 字符串长度]
-    y_train = [1, 1, 1, 1, 0, 0]  # 标签: 0 表示非问题链接，1 表示问题链接
-    # 创建决策树分类器并拟合数据
+    X_train = [[2, 10], [1, 8], [1, 12], [3, 15], [0, 10], [0, 80]]  
+    y_train = [1, 1, 1, 1, 0, 0] 
     clf = DecisionTreeClassifier()
     clf.fit(X_train, y_train)
 
@@ -57,27 +55,16 @@ def tree(times,length):
 def garorder_list(request):
     garorder = models.garorder.objects.all()
 
-    # for obj in garorder:
-    #     # 获取对象的id
-    #     object_id = obj.id
-    #     # 打印id
-    #     print(object_id)
-    # print(garorder['id'])
 
-    # 获取最后一项对象
     last_object = garorder.last()
 
-    # 获取最后一项对象的id
     last_object_id = last_object.id
     print(last_object_id)
     return render(request, 'garorder.html', {'garorder': garorder})
 
 def submitorder(request):
     if request.method == 'POST':
-        # 获取表单数据
         form_data = request.POST
-        # 或者使用以下方式获取某个字段的值
-        # field_value = request.POST['field_name']
         print(form_data)
         ordercontent=request.POST['ordercontent']
         try:
@@ -85,15 +72,14 @@ def submitorder(request):
             models.garorder.objects.create(ordercaptain=ordercontent)
 
             message['code'] = 200
-            message['message'] = "发起订单成功"
+            message['message'] = "success"
             garorder = models.garorder.objects.all()
             print(garorder)
             return render(request, 'garorder.html', {'garorder': garorder})
         except Exception as e:
             print(e)
 
-        # 返回响应或重定向到其他页面
-        return HttpResponse('表单')
+        return HttpResponse('site')
 
 def updatepassage(request):
     if request.method == 'POST':
@@ -105,7 +91,7 @@ def updatepassage(request):
         fo.write(passage_content)
         fo.close()
 
-        print("开始传输文本")
+        print("start passing")
         os.system('python predict.py')
 
 
@@ -130,18 +116,9 @@ def updatefile(request):
         detecinfo = models.detects.objects.all()
         print(detecinfo)
 
-        # for obj in garorder:
-        #     # 获取对象的id
-        #     object_id = obj.id
-        #     # 打印id
-        #     print(object_id)
-        # print(garorder['id'])
-
-        # 获取最后一项对象
         last_object = detecinfo.last()
         print(last_object)
 
-        # 获取最后一项对象的id
         fileid = (last_object.id)+1
         print(fileid)
 
@@ -153,15 +130,11 @@ def updatefile(request):
 
         import os
 
-        # 指定要创建的文件夹路径
         folder_path = 'static\\output\\'+str(fileid)
 
-        # 使用os.makedirs()函数递归地创建文件夹
         os.makedirs(folder_path)
 
-        # 打开特定的文件进行二进制的写操作
         f = open(folder_path+'\\upload.mp4', "wb+")
-        # 分块写入文件
         try:
             for chunk in myFile.chunks():
                 f.write(chunk)
@@ -173,16 +146,12 @@ def updatefile(request):
 
         models.detects.objects.create(detectcontent=folder_path+'\\upload.mp4',detectresult=folder_path+'\\output.mp4')
 
-        # 识别
-
         os.system("conda activate torch1.10 && python demo.py")
-        # 转码
         os.system("ffmpeg -i runs/detect/predict/upload.avi static/output/"+str(fileid)+"/output.mp4")
 
         detects = models.detects.objects.all()
         print(detects)
         return render(request, 'file-update.html', {'detects': detects})
-        # return HttpResponse("<script>window.location.replace('http://127.0.0.1:8000/href/FileUpdate/')</script>")
 
     if request.method == 'GET':
         detects = models.detects.objects.all()
@@ -206,7 +175,6 @@ def uploadwordfile(request):
 def uploadmainfile(request):
     def save_webpage_as_pdf(url, output_pdf):
         try:
-            # 使用wkhtmltopdf将网页保存为PDF
             pdfkit.from_url(url, output_pdf)
             print("网页已成功保存为PDF！")
         except Exception as e:
@@ -226,14 +194,9 @@ def uploadmainfile(request):
 
 
         else:
-        # print(request.POST['message'])
-
 
             try:
                 url = request.POST['url']
-                # url:
-                # 要保存的网页URL
-                # 输出的PDF文件路径
                 output_pdf = "static/file.pdf"
                 try:
                     os.remove(output_pdf)
@@ -266,7 +229,6 @@ def updatefilejpg(request):
 
 
         return render(request, 'word-update.html',{'allwords': allwords})
-        # return HttpResponse("<script>window.location.replace('http://127.0.0.1:8000/href/FileUpdate/')</script>")
 
     if request.method == 'GET':
         fo=open("words.txt",'r',encoding='utf-8')
